@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "ai-engine": "npx playwright test runner.spec.ts"
+    "ai-engine": "npx playwright test runner.spec.ts",
+    "test": "npx playwright test --headed",
+    "tag": "npx playwright test --headed --grep"
   },
   "keywords": [],
   "author": "",
