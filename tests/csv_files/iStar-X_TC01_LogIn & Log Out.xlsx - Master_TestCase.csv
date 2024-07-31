@@ -1,0 +1,6 @@
+TC Reference,Test case description,Expected outcome,Acutal outcome,Action,Test Data,Test Spec File Name,Tag,Page Objects File Name,Parent Folder Name,Element name,Locator Type,Role (used if locator type is role),Element Locator 
+TC_01,Invoke URL,Log in screen opes,Log in screen opnes,goto,https://practicetestautomation.com/practice-test-login/,Login-Test.spec.ts,"'@login', '@regression'",Login-Page.ts,Automation LogIn LogOut,,,,
+,Enter user name,enter user name and pwd,enter user name and pwd,fill,student,,,,,username,label,,username
+,Enter password,enter user name and pwd,enter user name and pwd,fill,Password123,,,,,password,label,,password
+,Click submit,able to log in successfully,able to log in successfully,click,,,,,,submit,role,button,Submit
+,Log out,logout successfully,logout successfully,click,,,,,,logout,role,link,Log out
