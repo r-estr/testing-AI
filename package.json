@@ -1,0 +1,25 @@
+{
+  "name": "ai-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "ai-engine": "npx playwright test runner.spec.ts",
+    "test": "npx playwright test --headed",
+    "tag": "npx playwright test --headed --grep"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.45.3",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "replace": "^1.2.2"
+  }
+}
