@@ -1,0 +1,17 @@
+TC Reference,Test case description,Expected outcome,Acutal outcome,Action,Test Data,Test Spec File Name,Tag,Page Objects File Name,Parent Folder Name,Element name,Locator Type,Role (used if locator type is role),Element Locator 
+TC_01,Invoke URL,Log in screen opes,Log in screen opnes,goto,https://www.saucedemo.com/,Login-purchase-test.spec.ts,"'@login', '@regression'",Login-Page.ts,Automation LogIn LogOut,,,,
+,Enter user name,enter user name and pwd,enter user name and pwd,fill,standard_user,,,,,user-name,locator,,"[id=""user-name""]"
+,Enter password,enter user name and pwd,enter user name and pwd,fill,secret_sauce,,,,,password,locator,,"[id=""password""]"
+,Click Login,able to log in successfully,able to log in successfully,click,,,,,,login-button,role,button,Login
+,go to URL,Inventory ,Inventory,goto,https://www.saucedemo.com/inventory.html,,,,,,,,
+,select item and add to cart,item added to card,selected item added to cart,click,,,,,,add-to-cart-sauce-labs-backpack,locator,,"[id=""add-to-cart-sauce-labs-backpack""]"
+,view cart,view cart,view cart,goto,https://www.saucedemo.com/cart.html,,,,,,,,
+,click checkout,checkout item,checkout,click,,,,,,checkout,role,button,Checkout
+,go to URL,Checkout information,checkout information,goto,https://www.saucedemo.com/checkout-step-one.html,,,,,,,,
+,Fill in - Name,Name,Name,fill,Rashmi,,,,,first-name,locator,,"[id=""first-name""]"
+,Fill ine - surname,Surname,Surname,fill,Trivedi,,,,,last-name,locator,,"[id=""last-name""]"
+,fill in  -post code,postcode,postcode,fill,2765,,,,,postal-code,locator,,"[id=""postal-code""]"
+,click Continue,continue,continue,click,,,,,,continue,locator,,"[id=""continue""]"
+,go to URL,checkout overview,checkout overview,goto,https://www.saucedemo.com/checkout-step-two.html,,,,,,,,
+,Click Finish,complete purchase,complete purchase,click,,,,,,finish,role,button,Finish
+,End of Purchase,end of purchase,end of purchase,goto,https://www.saucedemo.com/checkout-complete.html,,,,,,,,
