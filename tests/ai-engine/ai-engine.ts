@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { parse } from 'csv-parse';
-import replace from 'replace';
+import replace from 'replace'
 
 export default class AIEngine {
 
@@ -41,8 +41,8 @@ export default class AIEngine {
     });
   };
 
-  async spec_writer(result) {
-    let template = await fs.readFileSync(`${process.cwd()}/tests/ai-engine/spec_template.txt`, { encoding: 'utf-8' });
+  async spec_writer(result: any) {
+    let template = await fs.readFileSync(`${process.cwd()}/tests/template/spec_template.txt`, { encoding: 'utf-8' });
     await fs.appendFileSync(`${process.cwd()}/tests/${result[1].Parent_Folder_Name}/${result[1].Test_Spec_FileName}`, template)
 
     let steps = '';
@@ -61,6 +61,15 @@ export default class AIEngine {
         if (await result[i].Locator_Type == 'role') {
           steps = steps + `\nawait page.getByRole('${result[i].Role}', {name : '${result[i].Element_Locator}'}).fill('${result[i].Test_Data}');\n`
         }
+        if (await result[i].Locator_Type == 'locator') {
+          steps = steps + `\nawait page.locator('${result[i].Element_Locator}').fill('${result[i].Test_Data}');\n`
+        }
+        if (await result[i].Locator_Type == 'text') {
+          steps = steps + `\nawait page.getByText('${result[i].Element_Locator}').fill('${result[i].Test_Data}');\n`
+        }
+        if (await result[i].Locator_Type == 'altText') {
+          steps = steps + `\nawait page.getByAltText('${result[i].Element_Locator}').fill('${result[i].Test_Data}');\n`
+        }
       }
       if (await result[i].Action == 'click') {
         if (await result[i].Locator_Type == 'testId') {
@@ -71,6 +80,15 @@ export default class AIEngine {
         }
         if (await result[i].Locator_Type == 'role') {
           steps = steps + `\nawait page.getByRole('${result[i].Role}', {name : '${result[i].Element_Locator}'}).click();\n`
+        }
+        if (await result[i].Locator_Type == 'locator') {
+          steps = steps + `\nawait page.locator('${result[i].Element_Locator}').click();\n`
+        }
+        if (await result[i].Locator_Type == 'text') {
+          steps = steps + `\nawait page.getByText('${result[i].Element_Locator}').click();\n`
+        }
+        if (await result[i].Locator_Type == 'altText') {
+          steps = steps + `\nawait page.getByAltText('${result[i].Element_Locator}').click();\n`
         }
       }
     }
