@@ -1,0 +1,14 @@
+TC Reference,Request Type,API URL,Response code,Authetication Bearer token,Parameter,Request body,Response body,Test Spec file name,Parent Folder Name,Tag
+Demo GET Request,GET,https://fakerestapi.azurewebsites.net/api/v1/Activities,200,,,,,getRequestDemo.spec.ts,API Demo Test,"""@regression_api"""
+Demo POST Request,POST,https://fakerestapi.azurewebsites.net/api/v1/Activities,200,,,"{
+  ""id"": 1,
+  ""title"": ""Demo Post Request"",
+  ""dueDate"": ""2024-08-06T07:02:10.952Z"",
+  ""completed"": true
+}","{
+  ""id"": 1,
+  ""title"": ""Demo Post Request"",
+  ""dueDate"": ""2024-08-06T07:02:10.952Z"",
+  ""completed"": true
+}",postRequestDemo.spec.ts,API Demo Test,"""@regression_api"""
+Demo DELETE Request,DELETE,https://fakerestapi.azurewebsites.net/api/v1/Activities/{id},200,,id = 1,,,deleteRequestDemo.spec.ts,API Demo Test,"""@regression_api"""
