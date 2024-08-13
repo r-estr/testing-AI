@@ -7,19 +7,31 @@
   "scripts": {
     "ai-engine": "npx playwright test runner.spec.ts",
     "test": "npx playwright test --headed",
-    "tag": "npx playwright test --headed --grep"
+    "tag": "npx playwright test --headed --grep",
+    "build": "tsc",
+    "start": "node dist/server.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.45.3",
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
     "@types/node": "^22.0.0",
+    "body-parser": "^1.20.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
     "csv-parse": "^5.5.6",
-    "replace": "^1.2.2"
+    "express": "^4.19.2",
+    "files": "^3.0.1",
+    "multer": "^1.4.5-lts.1",
+    "typescript": "^5.5.4"
   }
 }
