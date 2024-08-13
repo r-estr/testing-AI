@@ -10,8 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import * as fs from "fs";
 import * as path from "path";
 import { parse } from 'csv-parse';
-// import replace from '../node_modules/replace/'
-// const replace = require('replace');
 export default class AIEngine {
     web_spec_creator(filename) {
         return __awaiter(this, void 0, void 0, function* () {
