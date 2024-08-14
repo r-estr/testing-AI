@@ -42,7 +42,7 @@ app.post('/', upload.single('csvfile'), (req, res) => {
         if (req.body.testType == 'API') {
             ai_engine.api_spec_creator(req.file.originalname)
         }
-        return res.json({ success: 'CSV file has been upload to tests/csv-files/ folder' });
+        return res.json({ success: 'CSV file has been upload to tests/csv-files/ folder and spec file has been generated' });
     }
 })
 
