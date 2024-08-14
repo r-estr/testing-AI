@@ -42,10 +42,10 @@ app.post('/', upload.single('csvfile'), (req, res) => {
         if (req.body.testType == 'API') {
             ai_engine.api_spec_creator(req.file.originalname)
         }
-        return res.json({ success: 'CSV file has been upload to tests/csv-files/ folder and spec file has been generated' });
+        return res.json({ success: 'CSV file has been upload to tests/csv-files/ folder' });
     }
 })
 
 app.listen('5500', () => {
-    console.log('Server is running on https://localhost:5500');
+    console.log('Server is running on http://localhost:5500');
 })
