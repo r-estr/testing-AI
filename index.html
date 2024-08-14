@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>AI ENGINE</h2><br>
+
+        <form method="post" action="/" id="uploadForm">
+            <label>Select what type of test to generate:</label>
+            <div class="form-check">
+                <input type="radio" value="Web" name="testType" id="web" class="form-check-input" /><label
+                    class="form-check-label" for="web">WEB</label><br>
+                <input type="radio" value="API" name="testType" id="api" class="form-check-input" /><label
+                    class="form-check-label" for="api">API</label><br>
+            </div>
+            <input type="file" id="csvfile" name="csvfile" accept=".csv" class="form-control" /><br>
+            <button class="btn btn-primary" type="submit" id="submit">Generate</button><br>
+            <pre id="fileContent"></pre>
+        </form>
+    </div>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('fileContent').textContent = JSON.stringify(result, null, 2);
+        })
+    </script>
+</body>
+
+</html>
