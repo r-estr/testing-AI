@@ -95,6 +95,51 @@ export default class AIEngine {
           steps = steps + `\nawait page.getByAltText('${result[i].Element_Locator}').click();\n`
         }
       }
+
+      if (await result[i].Action == 'verify - visible') {
+        console.log('Verification step created...');
+        if (await result[i].Locator_Type == 'testId') {
+          steps = steps + `\nexpect(await page.getByTestId('${result[i].Element_Locator}')).toBeVisible();\n`
+        }
+        if (await result[i].Locator_Type == 'label') {
+          steps = steps + `\nexpect(await page.getByLabel('${result[i].Element_Locator}')).toBeVisible();\n`
+        }
+        if (await result[i].Locator_Type == 'role') {
+          steps = steps + `\nexpect(await page.getByRole('${result[i].Role}', {name : '${result[i].Element_Locator}'})).toBeVisible();\n`
+        }
+        if (await result[i].Locator_Type == 'locator') {
+          steps = steps + `\nexpect(await page.locator('${result[i].Element_Locator}')).toBeVisible();\n`
+        }
+        if (await result[i].Locator_Type == 'text') {
+          steps = steps + `\nexpect(await page.getByText('${result[i].Element_Locator}')).toBeVisible();\n`
+        }
+        if (await result[i].Locator_Type == 'altText') {
+          steps = steps + `\nexpect(await page.getByAltText('${result[i].Element_Locator}')).toBeVisible();\n`
+        }
+      }
+
+      if (await result[i].Action == 'verify - enable') {
+        console.log('Verification step created...');
+        if (await result[i].Locator_Type == 'testId') {
+          steps = steps + `\nexpect(await page.getByTestId('${result[i].Element_Locator}')).toBeEnabled();\n`
+        }
+        if (await result[i].Locator_Type == 'label') {
+          steps = steps + `\nexpect(await page.getByLabel('${result[i].Element_Locator}')).toBeEnabled();\n`
+        }
+        if (await result[i].Locator_Type == 'role') {
+          steps = steps + `\nexpect(await page.getByRole('${result[i].Role}', {name : '${result[i].Element_Locator}'})).toBeEnabled();\n`
+        }
+        if (await result[i].Locator_Type == 'locator') {
+          steps = steps + `\nexpect(await page.locator('${result[i].Element_Locator}')).toBeEnabled();\n`
+        }
+        if (await result[i].Locator_Type == 'text') {
+          steps = steps + `\nexpect(await page.getByText('${result[i].Element_Locator}')).toBeEnabled();\n`
+        }
+        if (await result[i].Locator_Type == 'altText') {
+          steps = steps + `\nexpect(await page.getByAltText('${result[i].Element_Locator}')).toBeEnabled();\n`
+        }
+
+      }
     }
 
     await this.updateContent(filePath, 'TC_NAME', result[1].TC_Reference);
