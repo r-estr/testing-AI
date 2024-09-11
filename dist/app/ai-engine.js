@@ -94,6 +94,48 @@ export default class AIEngine {
                         steps = steps + `\nawait page.getByAltText('${result[i].Element_Locator}').click();\n`;
                     }
                 }
+                if ((yield result[i].Action) == 'verify - visible') {
+                    console.log('Verification step created...');
+                    if ((yield result[i].Locator_Type) == 'testId') {
+                        steps = steps + `\nexpect(await page.getByTestId('${result[i].Element_Locator}')).toBeVisible();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'label') {
+                        steps = steps + `\nexpect(await page.getByLabel('${result[i].Element_Locator}')).toBeVisible();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'role') {
+                        steps = steps + `\nexpect(await page.getByRole('${result[i].Role}', {name : '${result[i].Element_Locator}'})).toBeVisible();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'locator') {
+                        steps = steps + `\nexpect(await page.locator('${result[i].Element_Locator}')).toBeVisible();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'text') {
+                        steps = steps + `\nexpect(await page.getByText('${result[i].Element_Locator}')).toBeVisible();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'altText') {
+                        steps = steps + `\nexpect(await page.getByAltText('${result[i].Element_Locator}')).toBeVisible();\n`;
+                    }
+                }
+                if ((yield result[i].Action) == 'verify - enable') {
+                    console.log('Verification step created...');
+                    if ((yield result[i].Locator_Type) == 'testId') {
+                        steps = steps + `\nexpect(await page.getByTestId('${result[i].Element_Locator}')).toBeEnabled();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'label') {
+                        steps = steps + `\nexpect(await page.getByLabel('${result[i].Element_Locator}')).toBeEnabled();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'role') {
+                        steps = steps + `\nexpect(await page.getByRole('${result[i].Role}', {name : '${result[i].Element_Locator}'})).toBeEnabled();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'locator') {
+                        steps = steps + `\nexpect(await page.locator('${result[i].Element_Locator}')).toBeEnabled();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'text') {
+                        steps = steps + `\nexpect(await page.getByText('${result[i].Element_Locator}')).toBeEnabled();\n`;
+                    }
+                    if ((yield result[i].Locator_Type) == 'altText') {
+                        steps = steps + `\nexpect(await page.getByAltText('${result[i].Element_Locator}')).toBeEnabled();\n`;
+                    }
+                }
             }
             yield this.updateContent(filePath, 'TC_NAME', result[1].TC_Reference);
             yield this.updateContent(filePath, 'TAG', result[1].Tag);
@@ -103,7 +145,7 @@ export default class AIEngine {
     api_spec_creator(filename) {
         return __awaiter(this, void 0, void 0, function* () {
             const csvFilePath = yield path.resolve(`${process.cwd()}/tests/csv_files`, filename);
-            const headers = ['TC_Reference', 'Request_Type', 'API_URL', 'Response_Code', 'Authetication_Bearer_Token', 'Parameter', 'Request_Body', 'Response_Body', 'Test_Spec_FileName', 'Parent_Folder_Name', 'Tag'];
+            const headers = ['TC_Reference', 'Request_Type', 'API_URL', 'Response_Code', 'Headers', 'Authetication_Bearer_Token', 'Parameter', 'Request_Body', 'Response_Body', 'Test_Spec_FileName', 'Parent_Folder_Name', 'Tag'];
             const fileContent = yield fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
             yield parse(fileContent, {
                 delimiter: ',',
@@ -134,6 +176,7 @@ export default class AIEngine {
                 let requestBody = "";
                 let parameter = "";
                 let responseBody = "";
+                let header = "";
                 let api_url = result[i].API_URL;
                 if ((yield result[i].Request_Body) !== "") {
                     console.log('Creating request body...');
@@ -152,10 +195,15 @@ export default class AIEngine {
                     api_url = api_url.replace("{", "${");
                     parameter = `let ${result[i].Parameter};`;
                 }
+                if ((yield result[i].Headers) !== "") {
+                    console.log('Creating Headers...');
+                    header = `headers: ${result[i].Headers},`;
+                }
                 yield this.updateContent(filePath, 'TC_NAME', result[i].TC_Reference);
                 yield this.updateContent(filePath, 'TAG', result[i].Tag);
                 yield this.updateContent(filePath, 'API_URL', api_url);
                 yield this.updateContent(filePath, 'REQUEST_TYPE', result[i].Request_Type);
+                yield this.updateContent(filePath, 'HEADERS', header);
                 yield this.updateContent(filePath, 'DATA', requestBody);
                 yield this.updateContent(filePath, 'PARAMETER', parameter);
                 yield this.updateContent(filePath, 'RESPONSE_BODY', responseBody);

@@ -151,7 +151,7 @@ export default class AIEngine {
   async api_spec_creator(filename: any) {
     const csvFilePath = await path.resolve(`${process.cwd()}/tests/csv_files`, filename);
 
-    const headers = ['TC_Reference', 'Request_Type', 'API_URL', 'Response_Code', 'Authetication_Bearer_Token', 'Parameter', 'Request_Body', 'Response_Body', 'Test_Spec_FileName', 'Parent_Folder_Name', 'Tag'];
+    const headers = ['TC_Reference', 'Request_Type', 'API_URL', 'Response_Code', 'Headers', 'Authetication_Bearer_Token', 'Parameter', 'Request_Body', 'Response_Body', 'Test_Spec_FileName', 'Parent_Folder_Name', 'Tag'];
 
     const fileContent = await fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
 
@@ -189,6 +189,7 @@ export default class AIEngine {
       let requestBody = "";
       let parameter = "";
       let responseBody = "";
+      let header = "";
       let api_url = result[i].API_URL;
 
       if (await result[i].Request_Body !== "") {
@@ -208,11 +209,16 @@ export default class AIEngine {
         api_url = api_url.replace("{", "${")
         parameter = `let ${result[i].Parameter};`
       }
+      if (await result[i].Headers !== "") {
+        console.log('Creating Headers...');
+        header = `headers: ${result[i].Headers},`
+      }
 
       await this.updateContent(filePath, 'TC_NAME', result[i].TC_Reference);
       await this.updateContent(filePath, 'TAG', result[i].Tag);
       await this.updateContent(filePath, 'API_URL', api_url);
       await this.updateContent(filePath, 'REQUEST_TYPE', result[i].Request_Type);
+      await this.updateContent(filePath, 'HEADERS', header);
       await this.updateContent(filePath, 'DATA', requestBody);
       await this.updateContent(filePath, 'PARAMETER', parameter);
       await this.updateContent(filePath, 'RESPONSE_BODY', responseBody);

@@ -5,6 +5,7 @@ test('TC_NAME', { tag: [TAG] }, async ({ request }) => {
     PARAMETER
     await request.fetch(`API_URL`, {
         method: "REQUEST_TYPE",
+        HEADERS
         DATA
     }).then((apiResponse) => {
         expect(apiResponse.ok()).toBeTruthy();
